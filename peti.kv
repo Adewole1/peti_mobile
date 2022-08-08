@@ -1,0 +1,2961 @@
+#:import C kivy.utils.get_color_from_hex
+
+<MDRoundFlatButton, MDFillRoundFlatButton, MDRectangleFlatButton, MDRaisedButton, MDFlatButton, MDTextButton>:
+    font_name: 'Proxima'
+    markup: True
+    font_size: sp(16)
+
+<MDTextField>
+    font_name_helper_text: 'Proxima'
+    font_name_hint_text: 'Proxima'
+
+<IconListItem>
+    IconLeftWidget:
+        icon: root.icon
+
+<WelcomeScreen>:
+
+    FloatLayout:
+        padding: 0, 0, 0, 0
+        pos: self.parent.pos
+
+        FitImage:
+            source: 'assets/images/welcome.png'
+            size_hint: 1, 0.46
+            pos_hint: {'center_x': 0.5, 'top': 1}
+            # allow_stretch: True
+            # keep_ratio: False
+
+        MDLabel:
+            id: 'Welcome_1'
+            text: 'Need help taking care of your pets while you are away?'
+            bold: True
+            font_name: 'Proxima'
+            font_size: sp(24)
+            text_size: self.size
+            halign: 'center'
+            color: 38/255, 38/255, 38/255, 1
+            size_hint: 0.92, None
+            pos_hint: {'center_x': 0.5, 'top': 0.5}
+
+        MDLabel:
+            id: 'Welcome_2'
+            text: "Peti helps you find the perfect petcare giver to make your pet feel well and safe!"
+            font_size: sp(16)
+            font_name: 'Proxima'
+            text_size: self.size
+            # height: dp(20)
+            halign: 'center'
+            color: 38/255, 38/255, 38/255, 1
+            size_hint: 0.92, None
+            pos_hint: {'center_x': 0.5, 'top': 0.4}
+
+        MDRoundFlatButton:
+            text: "[b]Login[/b]"
+            background_color: 0, 0, 0, 0
+            color: 70/255, 110/255, 195/255, 1
+            size_hint: 0.92, 0.07
+            pos_hint: {'center_x': 0.5, 'top': 0.25}
+            rounded_button: True
+            on_release: root.manager.current = 'login'
+
+        MDFillRoundFlatButton:
+            text: "[b]Sign up[/b]"
+            color: 1, 1, 1, 1
+            size_hint: 0.92, 0.07
+            pos_hint: {'center_x': 0.5, 'top': 0.16}
+            rounded_button: True
+            on_release: root.manager.current = 'signup'
+
+<LoginScreen>:
+
+    on_leave:
+        email.text = ''
+        password.text = ''
+
+    FloatLayout:
+        padding: 0, 0, 0, 0
+        pos: self.parent.pos
+        FitImage:
+            id: logo
+            source: 'assets/images/peti.png'
+            size_hint: None, None
+            size: dp(50), dp(50)
+            right: self.parent.center_x-dp(1)
+            pos_hint: {'top': .94}
+
+        MDLabel:
+            text: "peti"
+            bold: True
+            font_name: 'Proxima'
+            font_size: sp(40)
+            text_size: self.size
+            size_hint: 0.5, None
+            height: dp(40)
+            halign: 'left'
+            color: 70/255, 110/255, 195/255, 1
+            #pos_hint: {'center_x': 0.58}
+            x: self.parent.center_x+dp(1)
+            y: logo.y+dp(6.5)
+
+        MDLabel:
+            text: "Login to your account"
+            bold: True
+            font_name: 'Proxima'
+            font_size: sp(24)
+            text_size: self.size
+            size_hint: 0.92, None
+            height: dp(24)
+            halign: 'center'
+            color: 38/255, 38/255, 38/255, 1
+            pos_hint: {'center_x': 0.5, 'top': 0.84}
+
+        MDTextField:
+            id: email
+            # focus: True
+            mode: 'fill'
+            hint_text: 'Email address'
+            text: ''
+            # required: True
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'joe@doe.com. Required'
+            helper_text_mode: 'on_error'
+            font_name: 'Proxima'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            size_hint: 0.92, 0.09
+            hint_text_font_size: sp(8)
+            font_size: sp(18)
+            pos_hint: {'center_x': 0.5, 'top': 0.75}
+            icon_left: 'at'
+            on_text:
+                self.hint_text_color_normal=[70/255, 110/255, 195/255, 1] if self.text != '' else [38/255, 38/255, 38/255, 0.5]
+                self.icon_left_color_normal=[70/255, 110/255, 195/255, 1] if self.text != '' else [38/255, 38/255, 38/255, 0.5]
+
+        MDTextField:
+            id: password
+            mode: 'fill'
+            password: True
+            text: ''
+            # required: True
+            hint_text: 'Password'
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required'
+            font_name: 'Proxima'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            size_hint: 0.92, 0.09
+            hint_text_font_size: sp(8)
+            font_size: sp(18)
+            pos_hint: {'center_x': 0.5, 'top': 0.63}
+            icon_left: 'key-variant'
+            on_text:
+                self.hint_text_color_normal=[70/255, 110/255, 195/255, 1] if self.text != '' else [38/255, 38/255, 38/255, 0.5]
+                self.icon_left_color_normal=[70/255, 110/255, 195/255, 1] if self.text != '' else [38/255, 38/255, 38/255, 0.5]
+
+        MDIconButton:
+            icon: "eye-off"
+            pos_hint: {"top": 0.62}
+            pos: password.width - self.width + dp(8), dp(0)
+            theme_text_color: "Hint"
+            on_release:
+                self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+                password.password = False if password.password is True else True
+
+        MDFillRoundFlatButton:
+            id: login
+            text: "[b]Login[/b]"
+            font_name: 'Proxima'
+            bold: True
+            color: 1, 1, 1, 1
+            border: 0, 0, 0, 0
+            size_hint: 0.92, 0.07
+            font_size: sp(18)
+            pos_hint: {'center_x': 0.5, 'top': 0.49}
+            on_release: root.check()
+
+        MDLabel:
+            id: socials
+            text: "Or continue with"
+            font_name: 'Proxima'
+            font_size: sp(16)
+            text_size: self.texture_size
+            size_hint: 1, None
+            height: dp(16)
+            halign: 'center'
+            color: 38/255, 38/255, 38/255, 1
+            pos_hint: {'center_x': 0.5}
+            top: login.y-20
+
+        Widget:
+            id: left
+            pos_hint: {'right': 0.04}
+            top: socials.center_y
+            size_hint: 1, None
+            height: dp(16)
+            canvas:
+                Color:
+                    rgba: 38/255, 38/255, 38/255, 1
+                Line:
+                    cap: 'square'
+                    width: dp(1)
+                    points: self.right, self.top, self.right*8, self.top
+
+        Widget:
+            pos_hint: {'x': 0.96}
+            center_y: left.center_y
+            size_hint: 1, None
+            height: dp(16)
+            canvas:
+                Color:
+                    rgba: 38/255, 38/255, 38/255, 1
+                Line:
+                    cap: 'square'
+                    width: dp(1)
+                    points: self.x, self.top, self.x/1.42, self.top
+
+        MDWidget:
+            size: dp(54), dp(40)
+            # pos_hint: {'top': 0.3}
+            # x: socials.center_x-60
+            pos_hint: {'x': 0.33, 'y': 0.28}
+            id: widget
+            canvas:
+                Color:
+                    rgba: 195/255, 195/255, 195/255, 1
+                Line:
+                    width: dp(1)
+                    rounded_rectangle: self.x, self.y, dp(54), dp(40), dp(2)
+            MDFloatLayout:
+                pos: self.parent.pos
+                size: dp(54), dp(40)
+                Image:
+                    source: 'assets/images/google.png'
+                    size_hint: None, None
+                    size: dp(24), dp(24)
+                    allow_stretch: True
+                    keep_ratio: False
+                    # pos: self.parent.x+15, self.parent.y+8
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        MDWidget:
+            size_hint: dp(54), dp(40)
+            pos_hint: {'x': 0.52}
+            y: widget.y
+            id: widget_2
+            canvas:
+                Color:
+                    rgba: 195/255, 195/255, 195/255, 1
+                Line:
+                    width: dp(1)
+                    rounded_rectangle: self.x, self.y, dp(54), dp(40), dp(2)
+
+            MDFloatLayout:
+                pos: self.parent.pos
+                size: dp(54), dp(40)
+
+                Image:
+                    source: 'assets/images/facebook.png'
+                    size_hint: None, None
+                    size: dp(24), dp(24)
+                    allow_stretch: True
+                    keep_ratio: False
+                    # pos: widget_2.x+15, widget_2.y+8
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        Label:
+            id: no
+            markup: True
+            text: "Don't have an account?  [ref=sign_up][color=#466EC3][b]Sign Up[/b][/color][/ref]"
+            font_size: sp(16)
+            font_name: 'Proxima'
+            halign: 'center'
+            color: 38/255, 38/255, 38/255, 1
+            size_hint: 1, None
+            height: dp(16)
+            text_size: self.size
+            # center_x: socials.center_x-45
+            pos_hint: {'top': 0.2, 'center_x': 0.5}
+            on_ref_press: root.signup()
+
+
+<SignUpScreen>:
+
+    on_leave:
+        signup_email.text = ''
+        signup_password.text = ''
+        signup_name.text = ''
+        signup_phone.text = ''
+
+    FloatLayout:
+        padding: 0, 0, 0, 0
+        pos: self.parent.pos
+        size: Window.size
+        FitImage:
+            id: logo
+            source: 'assets/images/peti.png'
+            size_hint: None, None
+            size: dp(50), dp(50)
+            right: self.parent.center_x-dp(1)
+            pos_hint: {'top': .94}
+
+        MDLabel:
+            text: "peti"
+            bold: True
+            font_name: 'Proxima'
+            font_size: sp(40)
+            text_size: self.size
+            size_hint: 0.5, None
+            height: dp(40)
+            halign: 'left'
+            color: 70/255, 110/255, 195/255, 1
+            #pos_hint: {'center_x': 0.58}
+            x: self.parent.center_x+dp(1)
+            y: logo.y+dp(6.5)
+
+        MDLabel:
+            text: "Sign up to create an account"
+            bold: True
+            font_name: 'Proxima'
+            font_size: sp(24)
+            text_size: self.size
+            size_hint: 0.92, None
+            height: dp(24)
+            halign: 'center'
+            color: 38/255, 38/255, 38/255, 1
+            pos_hint: {'center_x': 0.5, 'top': 0.84}
+
+        MDTextField:
+            id: signup_name
+            # focus: True
+            mode: 'fill'
+            text: ''
+            hint_text: 'Full name'
+            font_name: 'Proxima'
+            # required: True
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required'
+            helper_text_mode: 'on_focus'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            size_hint: 0.92, 0.09
+            hint_text_font_size: sp(8)
+            font_size: sp(18)
+            pos_hint: {'center_x': 0.5, 'top': 0.78}
+            icon_left: 'account'
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                if self.text != '': self.icon_left_color_normal=[70/255, 110/255, 195/255, 1]
+
+        MDTextField:
+            id: signup_email
+            # focus: True
+            mode: 'fill'
+            text: ''
+            hint_text: 'Email address'
+            font_name: 'Proxima'
+            # required: True
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'john@doe.com. Required'
+            helper_text_mode: 'on_focus'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            size_hint: 0.92, 0.09
+            hint_text_font_size: sp(8)
+            font_size: sp(18)
+            pos_hint: {'center_x': 0.5, 'top': 0.66}
+            icon_left: 'at'
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                if self.text != '': self.icon_left_color_normal=[70/255, 110/255, 195/255, 1]
+
+        MDTextField:
+            id: signup_password
+            mode: 'fill'
+            password: True
+            hint_text: 'Password'
+            font_name: 'Proxima'
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Alphanumeric. Required'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            size_hint: 0.92, 0.09
+            hint_text_font_size: sp(8)
+            font_size: sp(18)
+            pos_hint: {'center_x': 0.5, 'top': 0.54}
+            icon_left: 'key-variant'
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                if self.text != '': self.icon_left_color_normal=[70/255, 110/255, 195/255, 1]
+
+        MDIconButton:
+            icon: "eye-off"
+            pos_hint: {"top": 0.53}
+            pos: signup_password.width - self.width + dp(8), dp(0)
+            theme_text_color: "Hint"
+            on_release:
+                self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+                signup_password.password = False if signup_password.password is True else True
+
+        MDTextField:
+            id: signup_phone
+            # focus: True
+            mode: 'fill'
+            text: ''
+            hint_text: 'Phone Number'
+            input_type: 'tel'
+            # required: True
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required'
+            font_name: 'Proxima'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            size_hint: 0.92, 0.09
+            hint_text_font_size: sp(8)
+            font_size: sp(18)
+            pos_hint: {'center_x': 0.5, 'top': 0.42}
+            icon_left: 'card-account-phone'
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                if self.text != '': self.icon_left_color_normal=[70/255, 110/255, 195/255, 1]
+
+        MDFillRoundFlatButton:
+            id: signup
+            text: "[b]Sign Up[/b]"
+            font_name: 'Proxima'
+            bold: True
+            color: 1, 1, 1, 1
+            border: 0, 0, 0, 0
+            size_hint: 0.92, 0.07
+            text_size: dp(16)
+            pos_hint: {'center_x': 0.5, 'top': 0.28}
+            on_release: root.signup_check()
+
+        Label:
+            id: no
+            markup: True
+            text: "Already have an account?  [ref=log_in][color=#466EC3][b]Log in[/b][/color][/ref]"
+            font_name: 'Proxima'
+            font_size: sp(16)
+            halign: 'center'
+            color: 38/255, 38/255, 38/255, 1
+            size_hint: 1, None
+            height: dp(16)
+            pos_hint: {'top': 0.16, 'center_x': 0.5}
+            on_ref_press: root.login()
+
+
+<IntroductionScreen>:
+
+    on_leave:
+        pet_name.text = ''
+        pet_breed.text = ''
+        pet_feed.text = ''
+        pet_type.text = ''
+        pet_others.text = ''
+
+    FloatLayout:
+        padding: 0, 0, 0, 0
+        pos: self.parent.pos
+        size: Window.size
+        FitImage:
+            id: logo
+            source: 'assets/images/peti.png'
+            size_hint: None, None
+            size: dp(50), dp(50)
+            pos_hint: {'x': 0.04, 'top': 0.96}
+
+        MDLabel:
+            text: "Welcome to Peti"
+            font_name: 'Proxima'
+            bold: True
+            # bold: True
+            font_size: sp(20)
+            text_size: self.size
+            size_hint: 0.92, None
+            height: dp(20)
+            halign: 'center'
+            color: 38/255, 38/255, 38/255, 1
+            pos_hint: {'center_x': 0.5}
+            y: logo.y
+
+        MDLabel:
+            text: "Before we find you a Pet care giver, let's get to know about your Pet"
+            font_size: sp(16)
+            font_name: 'Proxima'
+            text_size: self.size
+            height: dp(16)
+            halign: 'center'
+            color: 38/255, 38/255, 38/255, 1
+            pos_hint: {'center_x': 0.5}
+            top: logo.y-dp(30)
+            size_hint: 0.92, None
+
+        Image:
+            source: 'assets/images/pets.png'
+            size_hint: None, None
+            size: dp(95), dp(93)
+            allow_stretch: True
+            keep_ratio: False
+            pos_hint: {'center_x': 0.5, 'top': 0.78}
+
+        MDTextField:
+            id: pet_name
+            # focus: True
+            mode: 'fill'
+            text: ''
+            hint_text: 'Pet name'
+            font_name: 'Proxima'
+            # required: True
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            size_hint: 0.44, 0.09
+            hint_text_font_size: sp(8)
+            font_size: sp(18)
+            pos_hint: {'right': 0.48, 'top': 0.62}
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+            # icon_left: 'card-account-phone'
+
+        MDTextField:
+            id: pet_type
+            # focus: True
+            mode: 'fill'
+            text: ''
+            # readonly: True
+            hint_text: 'Type of pet'
+            font_name: 'Proxima'
+            # required: True
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            size_hint: 0.44, 0.09
+            hint_text_font_size: sp(8)
+            font_size: sp(18)
+            pos_hint: {'x': 0.52, 'top': 0.62}
+            on_focus:
+                if self.focus: root.type_menu.open()
+                Window.release_all_keyboards()
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                pet_breed.text = ''
+
+        MDTextField:
+            id: pet_breed
+            # focus: True
+            mode: 'fill'
+            text: ''
+            hint_text: 'Type of breed'
+            font_name: 'Proxima'
+            # readonly: True
+            # required: True
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            size_hint: 0.44, 0.09
+            hint_text_font_size: sp(8)
+            font_size: sp(18)
+            pos_hint: {'right': 0.48, 'top': 0.50}
+            on_focus:
+                if self.focus: root.breed_menu.open()
+                Window.release_all_keyboards()
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+            # icon_left: 'card-account-phone'
+
+        MDTextField:
+            id: pet_feed
+            # focus: True
+            mode: 'fill'
+            text: ''
+            hint_text: 'Feeding time'
+            font_name: 'Proxima'
+            # readonly: True
+            # required: True
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            size_hint: 0.44, 0.09
+            hint_text_font_size: sp(8)
+            font_size: sp(18)
+            pos_hint: {'x': 0.52, 'top': 0.50}
+            on_focus:
+                if self.focus: root.time_picker()
+                Window.release_all_keyboards()
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+            # icon_left: 'card-account-phone'
+
+        MDTextField:
+            id: pet_others
+            # focus: True
+            mode: 'fill'
+            text: ''
+            hint_text: 'Notes and behaviours'
+            font_name: 'Proxima'
+            # required: True
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: True
+            size_hint: 0.92, None
+            hint_text_font_size: sp(8)
+            max_height: dp(150)
+            font_size: sp(18)
+            text_size: self.size
+            pos_hint: {'center_x': 0.5, 'top': 0.38}
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+            # icon_left: 'card-account-phone'
+
+        MDFillRoundFlatButton:
+            id: next_button
+            text: "[b]Next[/b]"
+            bold: True
+            color: 1, 1, 1, 1
+            border: 0, 0, 0, 0
+            size_hint: 0.44, 0.07
+            # height: 60
+            font_size: sp(16)
+            pos_hint: {'x': 0.52}
+            top: pet_others.y-dp(8)
+            on_release: root.introduction_check()
+
+        MDTextButton:
+            id: skip
+            text: "SKIP"
+            bold: True
+            color: 70/255, 110/255, 195/255, 1
+            halign: 'center'
+            size_hint: 0.44, None
+            text_size: self.size
+            font_size: sp(16)
+            height: dp(18)
+            pos_hint: {'x': 0.52}
+            top: pet_others.y-dp(62)
+            on_release: root.manager.current = 'home-signup'
+
+        MDTextButton:
+            text: "+  Add a new pet"
+            bold: True
+            color: 240/255, 101/255, 67/255, 1
+            halign: 'center'
+            font_name: 'Proxima'
+            valign: 'center'
+            size_hint: 0.44, 0.07
+            font_size: sp(16)
+            height: dp(16)
+            pos_hint: {'right': 0.48}
+            text_size: self.size
+            top: pet_others.y-dp(8)
+            # on_release: root.manager.current = 'home'
+
+
+<HomeSignupScreen>
+
+    on_leave:
+        giver_search.text = ''
+
+    MD3BottomNavigation:
+        id: home
+        panel_color: 1, 1, 1, 1
+        selected_color_background: 70/255, 110/255, 195/255, 0.4
+        text_color_active: 38/255, 38/255, 38/255, 1
+        font_name: 'Roboto'
+        height: dp(100)
+
+        MDBottomNavigationItem:
+            id: homes
+            name: 'screen1'
+            text: 'Home'
+            icon: 'home-variant'
+            font_name: 'Roboto'
+            on_tab_release:
+                self.icon = 'home-variant'
+                message.icon = 'message-text-outline'
+                profile.icon = 'account-outline'
+
+            MDWidget:
+                canvas.before:
+                    Color:
+                        rgba: 229/255, 229/255, 229/255, 1
+                    Rectangle:
+                        size: self.width, dp(2)
+
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                height: self.parent.height
+                # size: Window.width, Window.height
+                FloatLayout:
+                    id: float
+                    padding: 0, 0, 0, 0
+                    size_hint_y: None
+                    height: Window.height+dp(200)
+
+                    MDLabel:
+                        id: Home
+                        text: 'Home'
+                        font_name: 'Proxima'
+                        bold: True
+                        font_size: sp(24)
+                        color: 38/255, 38/255, 38/255, 1
+                        size_hint: 1, None
+                        text_size: self.size
+                        height: dp(24)
+                        pos_hint: {'x': 0.04, 'top': 0.98}
+
+                    MDTextField:
+                        id: giver_search
+                        # focus: True
+                        mode: 'round'
+                        text: ''
+                        fill_color_normal: 250/255, 250/255, 250/255, 1
+                        hint_text: 'Search for Pet care giver'
+                        font_name: 'Proxima'
+                        # required: True
+                        hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+                        hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+                        text_color_normal: 38/255, 38/255, 38/255, 1
+                        padding: 0, 0, 0, 0
+                        border: 0, 0, 0, 0
+                        multiline: False
+                        size_hint: 0.8, None
+                        height: dp(60)
+                        valign: 'center'
+                        hint_text_font_size: sp(8)
+                        font_size: sp(20)
+                        # text_size: self.size
+                        pos_hint: {'center_x': 0.5, 'top': 0.93}
+                        # top: Home.y+100
+                        icon_left: 'magnify'
+                        on_text:
+                            if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                            if self.text != '': self.icon_left_color_normal=[70/255, 110/255, 195/255, 1]
+
+                    MDCarousel:
+                        id: carousel
+                        direction: 'right'
+                        loop: True
+                        pos_hint: {'center_x': 0.5, 'top': 0.86}
+                        size_hint: 0.92, None
+                        height: dp(196)
+                        on_slide_progress:
+                            self.direction: 'right'
+                            root.carousel_changed()
+                        MDFloatLayout:
+                            FitImage:
+                                id: carousel1
+                                source: 'assets/images/home tips.png'
+                                # size_hint: 0.92, None
+                                height: dp(196)
+                                radius: dp(12), dp(12), dp(12), dp(12)
+                                # pos_hint: {'center_x': 0.5, 'top': 0.75}
+                                overlay_color: 1, 1, 1, 1
+
+                            MDWidget:
+                                # size_hint: 0.92, None
+                                height: dp(196)
+                                # pos_hint: {'center_x': 0.5, 'top': 0.75}
+                                canvas:
+                                    Color:
+                                        rgba: 38/255, 38/255, 38/255, 0.6
+                                    RoundedRectangle:
+                                        size: self.width, self.height
+                                        pos: self.pos
+                                        radius: [dp(12),]
+
+                            MDLabel:
+                                text: 'Latest tips to train your dog'
+                                font_name: 'Proxima'
+                                bold: True
+                                font_size: sp(24)
+                                color: 1, 1, 1, 1
+                                halign: 'center'
+                                size_hint: 0.95, None
+                                height: dp(24)
+                                pos_hint: {'center_x': 0.5}
+                                y: carousel1.top-100
+
+                        MDFloatLayout:
+                            FitImage:
+                                id: carousel2
+                                source: 'assets/images/welcome.png'
+                                # size_hint: 0.92, None
+                                height: dp(196)
+                                radius: dp(12), dp(12), dp(12), dp(12)
+                                # pos_hint: {'center_x': 0.5, 'top': 0.75}
+                                overlay_color: 1, 1, 1, 1
+
+                            MDWidget:
+                                # size_hint: 0.92, None
+                                height: dp(196)
+                                # pos_hint: {'center_x': 0.5, 'top': 0.75}
+                                canvas:
+                                    Color:
+                                        rgba: 38/255, 38/255, 38/255, 0.6
+                                    RoundedRectangle:
+                                        size: self.width, self.height
+                                        pos: self.pos
+                                        radius: [dp(12),]
+
+                            MDLabel:
+                                text: 'Welcome to the Peti'
+                                font_name: 'Proxima'
+                                bold: True
+                                font_size: sp(24)
+                                color: 1, 1, 1, 1
+                                halign: 'center'
+                                size_hint: 0.85, None
+                                height: dp(24)
+                                pos_hint: {'center_x': 0.5}
+                                y: carousel2.top-100
+
+                        MDFloatLayout:
+                            FitImage:
+                                id: carousel3
+                                source: 'assets/images/home tips.png'
+                                # size_hint: 0.92, None
+                                height: dp(196)
+                                radius: dp(12), dp(12), dp(12), dp(12)
+                                # pos_hint: {'center_x': 0.5, 'top': 0.75}
+                                overlay_color: 1, 1, 1, 1
+
+                            MDWidget:
+                                # size_hint: 0.92, None
+                                height: dp(196)
+                                # pos_hint: {'center_x': 0.5, 'top': 0.75}
+                                canvas:
+                                    Color:
+                                        rgba: 38/255, 38/255, 38/255, 0.6
+                                    RoundedRectangle:
+                                        size: self.width, self.height
+                                        pos: self.pos
+                                        radius: [dp(12),]
+
+                            MDLabel:
+                                text: 'Welcome to the Peti'
+                                font_name: 'Proxima'
+                                bold: True
+                                font_size: sp(24)
+                                color: 1, 1, 1, 1
+                                halign: 'center'
+                                size_hint: 0.85, None
+                                height: dp(24)
+                                pos_hint: {'center_x': 0.5}
+                                y: carousel3.top-100
+
+                    MDIconButton:
+                        id: circle1
+                        icon: 'circle'
+                        pos_hint: {'center_x': 0.42}
+                        center_y: carousel.y+dp(40)
+                        icon_size: dp(12)
+                        theme_icon_color: "Custom"
+                        icon_color: 240/255, 101/255, 67/255, 1
+                        on_release:
+                            carousel.index = 0
+                            self.icon_color = 240/255, 101/255, 67/255, 1
+                            circle2.icon_color = 1, 1, 1, 1
+                            circle3.icon_color = 1, 1, 1, 1
+
+                    MDIconButton:
+                        id: circle2
+                        icon: 'circle'
+                        pos_hint: {'center_x': 0.5}
+                        y: circle1.y
+                        icon_size: dp(12)
+                        theme_icon_color: "Custom"
+                        icon_color: 1, 1, 1, 1
+                        on_release:
+                            carousel.index = 1
+                            self.icon_color = 240/255, 101/255, 67/255, 1
+                            circle1.icon_color = 1, 1, 1, 1
+                            circle3.icon_color = 1, 1, 1, 1
+
+                    MDIconButton:
+                        id: circle3
+                        icon: 'circle'
+                        pos_hint: {'center_x': 0.58}
+                        y: circle1.y
+                        icon_size: dp(12)
+                        theme_icon_color: "Custom"
+                        icon_color: 1, 1, 1, 1
+                        on_release:
+                            carousel.index = 2
+                            self.icon_color = 240/255, 101/255, 67/255, 1
+                            circle1.icon_color = 1, 1, 1, 1
+                            circle2.icon_color = 1, 1, 1, 1
+
+                    MDLabel:
+                        id: nearby
+                        text: 'Nearby Pet care givers'
+                        font_name: 'Proxima'
+                        bold: True
+                        font_size: sp(16)
+                        text_size: self.size
+                        color: 38/255, 38/255, 38/255, 1
+                        size_hint: 0.92, None
+                        height: dp(16)
+                        pos_hint: {'x': 0.04}
+                        top: carousel.y-dp(20)
+
+                    MD3Card:
+                        id: first_card
+                        style: 'elevated'
+                        focus_behavior: True
+                        elevation: dp(1)
+                        # padding: '16px'
+                        radius: dp(12)
+                        md_bg_color: [1, 1, 1, 1]
+                        line_color: 195/255, 195/255, 195/255, 1
+                        size_hint: 0.44, 0.27
+                        pos_hint: {'right': 0.48}
+                        top: nearby.y-dp(20)
+
+                        MDFloatLayout:
+                            size_hint: None, None
+                            size: self.parent.size
+
+                            FitImage:
+                                source: 'assets/images/giver1.png'
+                                size_hint: None, None
+                                size: dp(60), dp(60)
+                                # radius: 12, 12, 12, 12
+                                pos_hint: {'center_x': 0.5, 'top': 0.90}
+                                overlay_color: 1, 1, 1, 1
+
+                            MDLabel:
+                                text: 'Kennedy Leonard'
+                                font_name: 'Proxima'
+                                bold: True
+                                font_size: sp(16)
+                                text_size: self.size
+                                halign: 'center'
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 0.92, None
+                                height: dp(16)
+                                pos_hint: {'center_x': 0.5, 'top': 0.58}
+
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.34, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.42, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.5, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.58, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.66, 'top': 0.48}
+
+                            MDIcon:
+                                id: icon
+                                icon: 'map-marker'
+                                font_size: sp(12)
+                                color: 70/255, 110/255, 195/255, 1
+                                pos_hint: {'center_x': 0.1,'top': 0.33}
+
+                            MDLabel:
+                                text: "2, Orange Estate, Lagos."
+                                font_name: 'Proxima'
+                                font_size: sp(12)
+                                halign: 'center'
+                                text_size: self.size
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 1, None
+                                height: dp(12)
+                                pos_hint: {'center_x': 0.55}
+                                y: icon.y-dp(0.5)
+
+                            MDFillRoundFlatButton:
+                                id: profile_button
+                                text: "[b]View Profile[/b]"
+                                bold: True
+                                color: 1, 1, 1, 1
+                                border: 0, 0, 0, 0
+                                size_hint: 0.8, 0.01
+                                # height: 60
+                                font_size: sp(12)
+                                pos_hint: {'center_x': 0.5, 'top': 0.2}
+                                on_release: root.manager.current = 'profiles'
+
+                    MD3Card:
+                        style: 'elevated'
+                        focus_behavior: True
+                        elevation: dp(1)
+                        # padding: '16px'
+                        radius: dp(12)
+                        md_bg_color: [1, 1, 1, 1]
+                        line_color: 195/255, 195/255, 195/255, 1
+                        size_hint: 0.44, 0.27
+                        pos_hint: {'x': 0.52}
+                        top: first_card.top
+
+                        MDFloatLayout:
+                            size_hint: None, None
+                            size: self.parent.size
+
+                            FitImage:
+                                source: 'assets/images/giver2.png'
+                                size_hint: None, None
+                                # height: '196px'
+                                size: dp(60), dp(60)
+                                # radius: 12, 12, 12, 12
+                                pos_hint: {'center_x': 0.5, 'top': 0.90}
+                                overlay_color: 1, 1, 1, 1
+
+                            MDLabel:
+                                text: 'Kennedy Leonard'
+                                font_name: 'Proxima'
+                                bold: True
+                                font_size: sp(16)
+                                text_size: self.size
+                                halign: 'center'
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 0.92, None
+                                height: dp(16)
+                                pos_hint: {'center_x': 0.5, 'top': 0.58}
+
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.34, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.42, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.5, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.58, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.66, 'top': 0.48}
+
+                            MDIcon:
+                                id: icon2
+                                icon: 'map-marker'
+                                font_size: sp(12)
+                                color: 70/255, 110/255, 195/255, 1
+                                pos_hint: {'center_x': 0.1,'top': 0.33}
+
+                            MDLabel:
+                                text: "2, Orange Estate, Lagos."
+                                font_name: 'Proxima'
+                                font_size: sp(12)
+                                halign: 'center'
+                                text_size: self.size
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 1, None
+                                height: dp(12)
+                                pos_hint: {'center_x': 0.55}
+                                y: icon2.y-dp(0.5)
+
+                            MDFillRoundFlatButton:
+                                id: profile_button
+                                text: "[b]View Profile[/b]"
+                                bold: True
+                                color: 1, 1, 1, 1
+                                border: 0, 0, 0, 0
+                                size_hint: 0.8, 0.01
+                                # height: 60
+                                font_size: sp(12)
+                                pos_hint: {'center_x': 0.5, 'top': 0.2}
+                                on_release: root.manager.current = 'profiles'
+
+                    MD3Card:
+                        id: last_card
+                        style: 'elevated'
+                        focus_behavior: True
+                        elevation: dp(1)
+                        # padding: '16px'
+                        radius: dp(12)
+                        md_bg_color: [1, 1, 1, 1]
+                        line_color: 195/255, 195/255, 195/255, 1
+                        size_hint: 0.44, 0.27
+                        pos_hint: {'right': 0.48}
+                        top: first_card.y-dp(16)
+
+                        MDFloatLayout:
+                            size_hint: None, None
+                            size: self.parent.size
+
+                            FitImage:
+                                source: 'assets/images/giver3.png'
+                                size_hint: None, None
+                                size: dp(60), dp(60)
+                                # radius: 12, 12, 12, 12
+                                pos_hint: {'center_x': 0.5, 'top': 0.90}
+                                overlay_color: 1, 1, 1, 1
+
+                            MDLabel:
+                                text: 'Kennedy Leonard'
+                                font_name: 'Proxima'
+                                bold: True
+                                font_size: sp(16)
+                                text_size: self.size
+                                halign: 'center'
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 0.92, None
+                                height: dp(16)
+                                pos_hint: {'center_x': 0.5, 'top': 0.58}
+
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.34, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.42, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.5, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.58, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.66, 'top': 0.48}
+
+                            MDIcon:
+                                id: icon3
+                                icon: 'map-marker'
+                                font_size: sp(12)
+                                color: 70/255, 110/255, 195/255, 1
+                                pos_hint: {'center_x': 0.1,'top': 0.33}
+
+                            MDLabel:
+                                text: "2, Orange Estate, Lagos."
+                                font_name: 'Proxima'
+                                font_size: sp(12)
+                                halign: 'center'
+                                text_size: self.size
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 1, None
+                                height: dp(12)
+                                pos_hint: {'center_x': 0.55}
+                                y: icon3.y-dp(0.5)
+
+                            MDFillRoundFlatButton:
+                                id: profile_button
+                                text: "[b]View Profile[/b]"
+                                bold: True
+                                color: 1, 1, 1, 1
+                                border: 0, 0, 0, 0
+                                size_hint: 0.8, 0.01
+                                # height: 60
+                                font_size: sp(12)
+                                pos_hint: {'center_x': 0.5, 'top': 0.2}
+                                on_release: root.manager.current = 'profiles'
+
+                    MD3Card:
+                        # id: last_card
+                        style: 'elevated'
+                        focus_behavior: True
+                        elevation: dp(1)
+                        # padding: '16px'
+                        radius: dp(12)
+                        md_bg_color: [1, 1, 1, 1]
+                        line_color: 195/255, 195/255, 195/255, 1
+                        size_hint: 0.44, 0.27
+                        pos_hint: {'x': 0.52}
+                        top: last_card.top
+
+                        MDFloatLayout:
+                            size_hint: None, None
+                            size: self.parent.size
+
+                            FitImage:
+                                source: 'assets/images/giver4.png'
+                                size_hint: None, None
+                                # height: '16px'
+                                size: dp(60), dp(60)
+                                # radius: 12, 12, 12, 12
+                                pos_hint: {'center_x': 0.5, 'top': 0.90}
+                                overlay_color: 1, 1, 1, 1
+
+                            MDLabel:
+                                text: 'Kennedy Leonard'
+                                font_name: 'Proxima'
+                                bold: True
+                                font_size: sp(16)
+                                text_size: self.size
+                                halign: 'center'
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 0.92, None
+                                height: dp(16)
+                                pos_hint: {'center_x': 0.5, 'top': 0.58}
+
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.34, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.42, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.5, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.58, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.66, 'top': 0.48}
+
+                            MDIcon:
+                                id: icon4
+                                icon: 'map-marker'
+                                font_size: sp(12)
+                                color: 70/255, 110/255, 195/255, 1
+                                pos_hint: {'center_x': 0.1,'top': 0.33}
+
+                            MDLabel:
+                                text: "2, Orange Estate, Lagos."
+                                font_name: 'Proxima'
+                                font_size: sp(12)
+                                halign: 'center'
+                                text_size: self.size
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 1, None
+                                height: dp(12)
+                                y: icon4.y-dp(0.5)
+                                pos_hint: {'center_x': 0.55}
+
+                            MDFillRoundFlatButton:
+                                id: profile_button
+                                text: "[b]View Profile[/b]"
+                                bold: True
+                                color: 1, 1, 1, 1
+                                border: 0, 0, 0, 0
+                                size_hint: 0.8, 0.01
+                                # height: 60
+                                font_size: sp(12)
+                                pos_hint: {'center_x': 0.5, 'top': 0.2}
+                                on_release: root.manager.current = 'profiles'
+
+        MDBottomNavigationItem:
+            id: message
+            name: 'screen 2'
+            text: 'Chats'
+            icon: 'message-text-outline'
+            on_tab_release:
+                self.icon = 'message-text'
+                homes.icon = 'home-variant-outline'
+                profile.icon = 'account-outline'
+
+            MDWidget:
+                canvas.before:
+                    Color:
+                        rgba: 229/255, 229/255, 229/255, 1
+                    Rectangle:
+                        size: self.width, dp(2)
+
+            FloatLayout:
+                id: float2
+                padding: 0, 0, 0, 0
+                # size_hint_y: None
+                # height: Window.height+200
+
+                MDLabel:
+                    text: 'Chats'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(24)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    pos_hint: {'x': 0.04, 'top': 0.98}
+                    text_size: self.size
+                    height: dp(24)
+
+                MDLabel:
+                    text: 'No Chats'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    pos_hint: {'x': 0.04, 'top': 0.92}
+                    size_hint: 1, None
+                    text_size: self.size
+                    height: dp(16)
+
+                MDLabel:
+                    text: 'Book a pet care giver to start a conversation'
+                    font_name: 'Proxima'
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    pos_hint: {'x': 0.04, 'top': 0.88}
+                    size_hint: 1, None
+                    text_size: self.size
+                    height: dp(16)
+
+        MDBottomNavigationItem:
+            id: profile
+            name: 'screen 3'
+            text: 'Profile'
+            icon: 'account-outline'
+            on_tab_release:
+                self.icon = 'account'
+                homes.icon = 'home-variant-outline'
+                message.icon = 'message-text-outline'
+
+            MDWidget:
+                canvas.before:
+                    Color:
+                        rgba: 229/255, 229/255, 229/255, 1
+                    Rectangle:
+                        size: self.width, dp(2)
+
+            FloatLayout:
+                id: float3
+                padding: 0, 0, 0, 0
+                # size_hint_y: None
+                # height: Window.height+200
+
+                MDLabel:
+                    text: 'Profile'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(24)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    pos_hint: {'x': 0.04, 'top': 0.98}
+                    height: dp(24)
+
+                MDIcon:
+                    icon: 'account-circle'
+                    font_size: sp(66.67)
+                    color: 229/255, 229/255, 229/255, 1
+                    height: dp(66.67)
+                    pos_hint: {'center_x': 0.5,'top': 0.92}
+
+                MDLabel:
+                    text: 'Email Address'
+                    font_size: sp(16)
+                    font_name: 'Proxima'
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.78}
+                    height: dp(16)
+
+                MDLabel:
+                    id: email
+                    text: 'abiolaoladele@gmail.com'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.745}
+                    height: dp(16)
+
+                MDWidget:
+                    canvas.after:
+                        Color:
+                            rgba: 229/255, 229/255, 229/255, 1
+                        Line:
+                            width: dp(0.5)
+                            points: self.x, self.y, self.x+Window.width, self.y
+                    pos_hint: {'top': 0.70}
+                    size_hint: 1, None
+                    height: dp(0.5)
+
+                MDLabel:
+                    text: 'Phone Number'
+                    font_size: sp(16)
+                    font_name: 'Proxima'
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.68}
+                    height: dp(16)
+
+                MDLabel:
+                    id: number
+                    text: '08100000000'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.645}
+                    height: dp(16)
+
+                MDWidget:
+                    canvas.after:
+                        Color:
+                            rgba: 229/255, 229/255, 229/255, 1
+                        Line:
+                            width: dp(0.5)
+                            points: self.x, self.y, self.x+Window.width, self.y
+                    pos_hint: {'top': 0.60}
+                    size_hint: 1, None
+                    height: dp(0.5)
+
+                MDLabel:
+                    text: 'My Pets'
+                    font_size: sp(16)
+                    font_name: 'Proxima'
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.58}
+                    height: dp(16)
+
+                MDLabel:
+                    id: pets
+                    text: 'Brandy'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.545}
+                    height: dp(16)
+
+                MDWidget:
+                    canvas.after:
+                        Color:
+                            rgba: 229/255, 229/255, 229/255, 1
+                        Line:
+                            width: dp(0.5)
+                            points: self.x, self.y, self.x+Window.width, self.y
+                    pos_hint: {'top': 0.50}
+                    size_hint: 1, None
+                    height: dp(0.5)
+
+                MDLabel:
+                    text: 'My Card'
+                    font_size: sp(16)
+                    font_name: 'Proxima'
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.48}
+                    height: dp(16)
+
+                MDLabel:
+                    id: card
+                    text: 'None'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.445}
+                    height: dp(16)
+
+                MDWidget:
+                    canvas.after:
+                        Color:
+                            rgba: 229/255, 229/255, 229/255, 1
+                        Line:
+                            width: dp(0.5)
+                            points: self.x, self.y, self.x+Window.width, self.y
+                    pos_hint: {'top': 0.40}
+                    size_hint: 1, None
+                    height: dp(0.5)
+
+                MDLabel:
+                    text: 'My booking history'
+                    font_size: sp(16)
+                    font_name: 'Proxima'
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.38}
+                    height: dp(16)
+
+                MDTextButton:
+                    text: 'Sign out'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(16)
+                    color: 245/255, 41/255, 53/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.25}
+                    height: dp(16)
+                    on_release: root.manager.current = 'login'
+
+                MDFloatingActionButton:
+                    icon: 'pencil'
+                    type: 'large'
+                    size: dp(56), dp(56)
+                    icon_color: 1, 1, 1, 1
+                    rounded_button: False
+                    pos_hint: {'center_x': 0.9, 'top': 0.1}
+
+
+<HomeLoginScreen>
+
+    on_leave:
+        giver_search.text = ''
+
+    MD3BottomNavigation:
+        id: home
+        panel_color: 1, 1, 1, 1
+        selected_color_background: 70/255, 110/255, 195/255, 0.4
+        text_color_active: 38/255, 38/255, 38/255, 1
+        height: dp(100)
+
+        MDBottomNavigationItem:
+            id: homes
+            name: 'screen 1'
+            text: 'Home'
+            icon: 'home-variant'
+            on_tab_release:
+                self.icon = 'home-variant'
+                message.icon = 'message-text-outline'
+                profile.icon = 'account-outline'
+
+            MDWidget:
+                canvas.before:
+                    Color:
+                        rgba: 229/255, 229/255, 229/255, 1
+                    Rectangle:
+                        size: self.width, dp(2)
+
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                height: self.parent.height
+                scroll_type: ['content', 'bars']
+                # size: Window.width, Window.height
+                FloatLayout:
+                    id: float
+                    padding: 0, 0, 0, 0
+                    size_hint_y: None
+                    height: Window.height+250
+
+                    MDLabel:
+                        text: 'Home'
+                        font_name: 'Proxima'
+                        bold: True
+                        font_size: sp(24)
+                        color: 38/255, 38/255, 38/255, 1
+                        size_hint: 1, None
+                        text_size: self.size
+                        height: dp(24)
+                        pos_hint: {'x': 0.04, 'top': 0.98}
+
+                    MDTextField:
+                        id: giver_search
+                        # focus: True
+                        mode: 'round'
+                        text: ''
+                        fill_color_normal: 250/255, 250/255, 250/255, 1
+                        hint_text: 'Search for Pet care giver'
+                        font_name: 'Proxima'
+                        # required: True
+                        hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+                        hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+                        text_color_normal: 38/255, 38/255, 38/255, 1
+                        padding: 0, 0, 0, 0
+                        border: 0, 0, 0, 0
+                        multiline: False
+                        size_hint: 0.8, None
+                        height: dp(60)
+                        valign: 'center'
+                        hint_text_font_size: sp(8)
+                        font_size: sp(20)
+                        # text_size: self.size
+                        pos_hint: {'center_x': 0.5, 'top': 0.93}
+                        # top: Home.y+100
+                        icon_left: 'magnify'
+                        on_text:
+                            if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                            if self.text != '': self.icon_left_color_normal=[70/255, 110/255, 195/255, 1]
+
+                    MDLabel:
+                        id: bookings
+                        text: 'Recent bookings'
+                        font_name: 'Proxima'
+                        bold: True
+                        font_size: sp(16)
+                        color: 38/255, 38/255, 38/255, 1
+                        size_hint: 0.92, None
+                        text_size: self.size
+                        height: dp(16)
+                        pos_hint: {'x': 0.04, 'top': 0.87}
+
+                    MDTextButton:
+                        text: 'See all'
+                        bold: True
+                        font_size: sp(14)
+                        color: 245/255, 41/255, 53/255, 1
+                        size_hint: 0.92, None
+                        halign: 'right'
+                        text_size: self.size
+                        height: dp(14)
+                        pos_hint: {'x': 0.04}
+                        y: bookings.y
+
+
+                    MD3Card:
+                        style: 'elevated'
+                        elevation: dp(1)
+                        radius: dp(12)
+                        md_bg_color: [70/255, 110/255, 195/255, 1]
+                        size_hint: 0.92, 0.2
+                        pos_hint: {'center_x': 0.5, 'top': 0.84}
+
+                        MDFloatLayout:
+                            size_hint: None, None
+                            size: self.parent.size
+                            pos: self.parent.pos
+
+                            FitImage:
+                                source: 'assets/images/giver1.png'
+                                size_hint: None, None
+                                size: dp(50), dp(50)
+                                pos_hint: {'x': 0.07, 'top': 0.8}
+
+                            MDLabel:
+                                text: 'Kennedy Leonard'
+                                font_name: 'Proxima'
+                                bold: True
+                                font_size: sp(16)
+                                text_size: self.size
+                                color: 1, 1, 1, 1
+                                size_hint: 1, None
+                                height: dp(16)
+                                pos_hint: {'x': 0.25, 'top': 0.8}
+
+                            MDFloatLayout:
+                                id: back
+                                pos_hint: {'x': 0.85, 'top': 0.82}
+                                size_hint: None, None
+                                size: dp(30), dp(30)
+                                canvas.before:
+                                    Color:
+                                        rgba: 1, 1, 1, 1
+                                    Ellipse:
+                                        size: dp(30), dp(30)
+                                        pos: self.pos
+
+                                MDIconButton:
+                                    icon: 'forum-outline'
+                                    theme_icon_color: 'Custom'
+                                    icon_color: [70/255, 110/255, 195/255, 1]
+                                    icon_size: dp(20)
+                                    height: dp(20)
+                                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                                    on_release: root.manager.current = 'chats'
+
+                            MDIcon:
+                                id: map_icon
+                                icon: 'map-marker'
+                                color: [1, 1, 1, 1]
+                                font_size: sp(14)
+                                height: dp(14)
+                                pos_hint: {'x': 0.25, 'top': 0.68}
+
+                            MDLabel:
+                                text: '2, Orange Estate, Lagos'
+                                font_name: 'Proxima'
+                                font_size: sp(12)
+                                color: 1, 1, 1, 1
+                                size_hint: 1, None
+                                height: dp(12)
+                                text_size: self.size
+                                pos_hint: {'x': 0.295}
+                                y: map_icon.y
+
+                            MD3Card:
+                                id: card_in
+                                radius: dp(6)
+                                size_hint: 0.85, 0.25
+                                pos_hint: {'center_x': 0.5, 'top': 0.38}
+
+                                MDFloatLayout:
+                                    size_hint: None, None
+                                    size: self.parent.size
+
+                                    MDIcon:
+                                        icon: 'clock-outline'
+                                        font_size: sp(20)
+                                        height: dp(20)
+                                        color: [70/255, 110/255, 195/255, 1]
+                                        pos_hint: {'center_y': 0.5, 'right': 0.2}
+
+                                    MDLabel:
+                                        text: 'April 15 - 24, 9:00 am to 6 pm'
+                                        font_name: 'Proxima'
+                                        color: [70/255, 110/255, 195/255, 1]
+                                        halign: 'left'
+                                        font_size: sp(12)
+                                        size_hint: 1, None
+                                        height: dp(12)
+                                        text_size: self.size
+                                        pos_hint: {'center_y': 0.5, 'x': 0.25}
+
+                    MDLabel:
+                        id: nearby
+                        text: 'Nearby Pet care givers'
+                        font_name: 'Proxima'
+                        bold: True
+                        font_size: sp(16)
+                        color: 38/255, 38/255, 38/255, 1
+                        size_hint: 0.92, None
+                        text_size: self.size
+                        height: dp(16)
+                        pos_hint: {'x': 0.04, 'top': 0.615}
+
+                    MDTextButton:
+                        text: 'See all'
+                        bold: True
+                        font_size: sp(14)
+                        color: 245/255, 41/255, 53/255, 1
+                        size_hint: 0.92, None
+                        halign: 'right'
+                        text_size: self.size
+                        height: dp(16)
+                        pos_hint: {'x': 0.04}
+                        y: nearby.y
+
+                    MD3Card:
+                        style: 'elevated'
+                        focus_behavior: True
+                        elevation: dp(1)
+                        # padding: '16px'
+                        radius: dp(12)
+                        md_bg_color: [1, 1, 1, 1]
+                        line_color: 195/255, 195/255, 195/255, 1
+                        size_hint: 0.44, 0.265
+                        pos_hint: {'right': 0.48, 'top': 0.585}
+
+                        MDFloatLayout:
+                            size_hint: None, None
+                            size: self.parent.size
+
+                            FitImage:
+                                source: 'assets/images/giver1.png'
+                                size_hint: None, None
+                                size: dp(60), dp(60)
+                                # radius: 12, 12, 12, 12
+                                pos_hint: {'center_x': 0.5, 'top': 0.90}
+                                overlay_color: 1, 1, 1, 1
+
+                            MDLabel:
+                                text: 'Kennedy Leonard'
+                                font_name: 'Proxima'
+                                bold: True
+                                font_size: sp(16)
+                                halign: 'center'
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 0.92, None
+                                text_size: self.size
+                                height: dp(16)
+                                pos_hint: {'center_x': 0.5, 'top': 0.58}
+
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.34, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.42, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.5, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.58, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.66, 'top': 0.48}
+
+                            MDIcon:
+                                id: icon
+                                icon: 'map-marker'
+                                font_size: sp(12)
+                                height: dp(12)
+                                color: 70/255, 110/255, 195/255, 1
+                                pos_hint: {'center_x': 0.1,'top': 0.33}
+
+                            MDLabel:
+                                text: "2, Orange Estate, Lagos."
+                                font_name: 'Proxima'
+                                font_size: sp(12)
+                                halign: 'center'
+                                text_size: self.size
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 1, None
+                                height: dp(12)
+                                pos_hint: {'center_x': 0.55}
+                                y: icon.y-dp(1)
+
+                            MDFillRoundFlatButton:
+                                id: profile_button
+                                text: "[b]View Profile[/b]"
+                                bold: True
+                                color: 1, 1, 1, 1
+                                border: 0, 0, 0, 0
+                                size_hint: 0.8, 0.01
+                                # height: 60
+                                font_size: sp(12)
+                                pos_hint: {'center_x': 0.5, 'top': 0.2}
+                                on_release: root.manager.current = 'profiles'
+
+                    MD3Card:
+                        style: 'elevated'
+                        focus_behavior: True
+                        elevation: dp(1)
+                        # padding: '16px'
+                        radius: dp(12)
+                        md_bg_color: [1, 1, 1, 1]
+                        line_color: 195/255, 195/255, 195/255, 1
+                        size_hint: 0.44, 0.265
+                        pos_hint: {'x': 0.52, 'top': 0.585}
+
+                        MDFloatLayout:
+                            size_hint: None, None
+                            size: self.parent.size
+
+                            FitImage:
+                                source: 'assets/images/giver2.png'
+                                size_hint: None, None
+                                # height: '196px'
+                                size: dp(60), dp(60)
+                                # radius: 12, 12, 12, 12
+                                pos_hint: {'center_x': 0.5, 'top': 0.90}
+                                overlay_color: 1, 1, 1, 1
+
+                            MDLabel:
+                                text: 'Kennedy Leonard'
+                                font_name: 'Proxima'
+                                bold: True
+                                font_size: sp(16)
+                                text_size: self.size
+                                halign: 'center'
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 0.92, None
+                                height: dp(16)
+                                pos_hint: {'center_x': 0.5, 'top': 0.58}
+
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.34, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.42, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.5, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.58, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.66, 'top': 0.48}
+
+                            MDIcon:
+                                id: icon2
+                                icon: 'map-marker'
+                                font_size: sp(12)
+                                color: 70/255, 110/255, 195/255, 1
+                                pos_hint: {'center_x': 0.1,'top': 0.33}
+
+                            MDLabel:
+                                text: "2, Orange Estate, Lagos."
+                                font_name: 'Proxima'
+                                font_size: sp(12)
+                                halign: 'center'
+                                text_size: self.size
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 1, None
+                                height: dp(12)
+                                pos_hint: {'center_x': 0.55}
+                                y: icon2.y-dp(1)
+
+                            MDFillRoundFlatButton:
+                                id: profile_button
+                                text: "[b]View Profile[/b]"
+                                bold: True
+                                color: 1, 1, 1, 1
+                                border: 0, 0, 0, 0
+                                size_hint: 0.8, 0.01
+                                font_size: sp(12)
+                                pos_hint: {'center_x': 0.5, 'top': 0.2}
+                                on_release: root.manager.current = 'profiles'
+
+                    MD3Card:
+                        style: 'elevated'
+                        focus_behavior: True
+                        elevation: dp(1)
+                        # padding: '16px'
+                        radius: dp(12)
+                        md_bg_color: [1, 1, 1, 1]
+                        line_color: 195/255, 195/255, 195/255, 1
+                        size_hint: 0.44, 0.265
+                        pos_hint: {'right': 0.48, 'top': 0.305}
+
+                        MDFloatLayout:
+                            size_hint: None, None
+                            size: self.parent.size
+
+                            FitImage:
+                                source: 'assets/images/giver3.png'
+                                size_hint: None, None
+                                # height: '196px'
+                                size: dp(60), dp(60)
+                                # radius: 12, 12, 12, 12
+                                pos_hint: {'center_x': 0.5, 'top': 0.90}
+                                overlay_color: 1, 1, 1, 1
+
+                            MDLabel:
+                                text: 'Kennedy Leonard'
+                                font_name: 'Proxima'
+                                bold: True
+                                font_size: sp(16)
+                                text_size: self.size
+                                halign: 'center'
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 0.92, None
+                                height: dp(16)
+                                pos_hint: {'center_x': 0.5, 'top': 0.58}
+
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.34, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.42, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.5, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.58, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.66, 'top': 0.48}
+
+                            MDIcon:
+                                id: icon3
+                                icon: 'map-marker'
+                                font_size: sp(12)
+                                color: 70/255, 110/255, 195/255, 1
+                                pos_hint: {'center_x': 0.1,'top': 0.33}
+
+                            MDLabel:
+                                text: "2, Orange Estate, Lagos."
+                                font_name: 'Proxima'
+                                font_size: sp(12)
+                                halign: 'center'
+                                text_size: self.size
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 1, None
+                                height: dp(12)
+                                pos_hint: {'center_x': 0.55}
+                                y: icon3.y-dp(1)
+
+                            MDFillRoundFlatButton:
+                                id: profile_button
+                                text: "[b]View Profile[/b]"
+                                bold: True
+                                color: 1, 1, 1, 1
+                                border: 0, 0, 0, 0
+                                size_hint: 0.8, 0.01
+                                # height: 60
+                                font_size: sp(12)
+                                pos_hint: {'center_x': 0.5, 'top': 0.2}
+                                on_release: root.manager.current = 'profiles'
+
+                    MD3Card:
+                        id: last_card
+                        style: 'elevated'
+                        focus_behavior: True
+                        elevation: dp(1)
+                        # padding: '16px'
+                        radius: dp(12)
+                        md_bg_color: [1, 1, 1, 1]
+                        line_color: 195/255, 195/255, 195/255, 1
+                        size_hint: 0.44, 0.265
+                        pos_hint: {'x': 0.52, 'top': 0.305}
+
+                        MDFloatLayout:
+                            size_hint: None, None
+                            size: self.parent.size
+
+                            FitImage:
+                                source: 'assets/images/giver4.png'
+                                size_hint: None, None
+                                # height: '16px'
+                                size: dp(60), dp(60)
+                                # radius: 12, 12, 12, 12
+                                pos_hint: {'center_x': 0.5, 'top': 0.90}
+                                overlay_color: 1, 1, 1, 1
+
+                            MDLabel:
+                                text: 'Kennedy Leonard'
+                                font_name: 'Proxima'
+                                bold: True
+                                font_size: sp(16)
+                                text_size: self.size
+                                halign: 'center'
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 0.92, None
+                                height: dp(16)
+                                pos_hint: {'center_x': 0.5, 'top': 0.58}
+
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.34, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.42, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.5, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.58, 'top': 0.48}
+                            MDIcon:
+                                icon: 'star'
+                                font_size: sp(14)
+                                pos_hint: {'center_x': 0.66, 'top': 0.48}
+
+                            MDIcon:
+                                id: icon4
+                                icon: 'map-marker'
+                                font_size: sp(12)
+                                color: 70/255, 110/255, 195/255, 1
+                                pos_hint: {'center_x': 0.1,'top': 0.33}
+
+                            MDLabel:
+                                text: "2, Orange Estate, Lagos."
+                                font_name: 'Proxima'
+                                font_size: sp(12)
+                                halign: 'center'
+                                text_size: self.size
+                                color: 38/255, 38/255, 38/255, 1
+                                size_hint: 1, None
+                                height: dp(12)
+                                y: icon4.y-dp(1)
+                                pos_hint: {'center_x': 0.55}
+
+                            MDFillRoundFlatButton:
+                                id: profile_button
+                                text: "[b]View Profile[/b]"
+                                bold: True
+                                color: 1, 1, 1, 1
+                                border: 0, 0, 0, 0
+                                size_hint: 0.8, 0.01
+                                # height: 60
+                                font_size: sp(12)
+                                pos_hint: {'center_x': 0.5, 'top': 0.2}
+                                on_release: root.manager.current = 'profiles'
+
+        MDBottomNavigationItem:
+            id: message
+            name: 'screen 2'
+            text: 'Chats'
+            icon: 'message-text-outline'
+            on_tab_release:
+                self.icon = 'message-text'
+                homes.icon = 'home-variant-outline'
+                profile.icon = 'account-outline'
+
+            MDWidget:
+                canvas.before:
+                    Color:
+                        rgba: 229/255, 229/255, 229/255, 1
+                    Rectangle:
+                        size: self.width, dp(2)
+
+            FloatLayout:
+                id: float2
+                padding: 0, 0, 0, 0
+                # size_hint_y: None
+                # height: Window.height+200
+
+                MDLabel:
+                    text: 'Chats'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(24)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    height: dp(24)
+                    pos_hint: {'x': 0.04, 'top': 0.98}
+
+                FitImage:
+                    source: 'assets/images/giver1.png'
+                    size_hint: None, None
+                    size: dp(51), dp(51)
+                    pos_hint: {'x': 0.04, 'top': 0.9}
+
+                MDTextButton:
+                    text: 'Kennedy Leonard'
+                    bold: True
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    pos_hint: {'x': 0.21, 'top': 0.9}
+                    size_hint: 1, None
+                    height: dp(16)
+                    text_size: self.size
+                    on_release: root.manager.current = 'chats'
+
+                MDLabel:
+                    text: '19 Apr, 10:00 am'
+                    font_name: 'Proxima'
+                    font_size: sp(12)
+                    color: 38/255, 38/255, 38/255, 1
+                    halign: 'right'
+                    pos_hint: {'center_x': 0.5, 'top': 0.9}
+                    size_hint: 0.92, None
+                    height: dp(12)
+                    text_size: self.size
+
+                MDLabel:
+                    text: 'Brandy seems to be getting along...'
+                    font_name: 'Proxima'
+                    font_size: sp(14)
+                    color: 38/255, 38/255, 38/255, 1
+                    pos_hint: {'x': 0.21, 'top': 0.86}
+                    size_hint: 1, None
+                    height: dp(14)
+                    text_size: self.size
+
+        MDBottomNavigationItem:
+            id: profile
+            name: 'screen 3'
+            text: 'Profile'
+            icon: 'account-outline'
+            on_tab_release:
+                self.icon = 'account'
+                homes.icon = 'home-variant-outline'
+                message.icon = 'message-text-outline'
+
+            MDWidget:
+                canvas.before:
+                    Color:
+                        rgba: 229/255, 229/255, 229/255, 1
+                    Rectangle:
+                        size: self.width, dp(2)
+
+            FloatLayout:
+                id: float3
+                padding: 0, 0, 0, 0
+                # size_hint_y: None
+                # height: Window.height+200
+
+                MDLabel:
+                    text: 'Profile'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(24)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    pos_hint: {'x': 0.04, 'top': 0.98}
+                    height: dp(24)
+
+                MDIcon:
+                    icon: 'account-circle'
+                    font_size: sp(66.67)
+                    color: 229/255, 229/255, 229/255, 1
+                    height: dp(66.67)
+                    pos_hint: {'center_x': 0.5,'top': 0.92}
+
+                MDLabel:
+                    text: 'Email Address'
+                    font_name: 'Proxima'
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.78}
+                    height: dp(16)
+
+                MDLabel:
+                    id: email
+                    text: 'abiolaoladele@gmail.com'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.745}
+                    height: dp(16)
+
+                MDWidget:
+                    canvas.after:
+                        Color:
+                            rgba: 229/255, 229/255, 229/255, 1
+                        Line:
+                            width: dp(0.5)
+                            points: self.x, self.y, self.x+Window.width, self.y
+                    pos_hint: {'top': 0.70}
+                    size_hint: 1, None
+                    height: dp(0.5)
+
+                MDLabel:
+                    text: 'Phone Number'
+                    font_name: 'Proxima'
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.68}
+                    height: dp(16)
+
+                MDLabel:
+                    id: number
+                    text: '08100000000'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.645}
+                    height: dp(16)
+
+                MDWidget:
+                    canvas.after:
+                        Color:
+                            rgba: 229/255, 229/255, 229/255, 1
+                        Line:
+                            width: dp(0.5)
+                            points: self.x, self.y, self.x+Window.width, self.y
+                    pos_hint: {'top': 0.60}
+                    size_hint: 1, None
+                    height: dp(0.5)
+
+                MDLabel:
+                    text: 'My Pets'
+                    font_name: 'Proxima'
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.58}
+                    height: dp(16)
+
+                MDLabel:
+                    id: pets
+                    text: 'Brandy'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.545}
+                    height: dp(16)
+
+                MDWidget:
+                    canvas.after:
+                        Color:
+                            rgba: 229/255, 229/255, 229/255, 1
+                        Line:
+                            width: dp(0.5)
+                            points: self.x, self.y, self.x+Window.width, self.y
+                    pos_hint: {'top': 0.50}
+                    size_hint: 1, None
+                    height: dp(0.5)
+
+                MDLabel:
+                    text: 'My Card'
+                    font_name: 'Proxima'
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.48}
+                    height: dp(16)
+
+                MDLabel:
+                    id: card
+                    text: 'None'
+                    font_name: 'Proxima'
+                    bold: True
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.445}
+                    height: dp(16)
+
+                MDWidget:
+                    canvas.after:
+                        Color:
+                            rgba: 229/255, 229/255, 229/255, 1
+                        Line:
+                            width: dp(0.5)
+                            points: self.x, self.y, self.x+Window.width, self.y
+                    pos_hint: {'top': 0.40}
+                    size_hint: 1, None
+                    height: dp(0.5)
+
+                MDLabel:
+                    text: 'My booking history'
+                    font_name: 'Proxima'
+                    font_size: sp(16)
+                    color: 38/255, 38/255, 38/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.38}
+                    height: dp(16)
+
+                MDTextButton:
+                    text: 'Sign out'
+                    bold: True
+                    font_size: sp(16)
+                    color: 245/255, 41/255, 53/255, 1
+                    size_hint: 1, None
+                    text_size: self.size
+                    pos_hint: {'x': 0.04, 'top': 0.25}
+                    height: dp(16)
+                    on_release: root.manager.current = 'login'
+
+                MDFloatingActionButton:
+                    icon: 'pencil'
+                    type: 'large'
+                    size: dp(56), dp(56)
+                    icon_color: 1, 1, 1, 1
+                    rounded_button: False
+                    pos_hint: {'center_x': 0.9, 'top': 0.1}
+
+
+<ChatsScreen>:
+
+    on_leave:
+        chat_message.text = ''
+
+    FloatLayout:
+        padding: 0, 0, 0, 0
+
+        MD3FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: [1, 1, 1, 1]
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            style: 'elevated'
+            elevation: 4
+            size_hint: 1, 0.08
+            pos_hint: {'center_x': 0.5,'top': 1}
+
+            MDIconButton:
+                icon: 'chevron-left'
+                theme_icon_color: 'Custom'
+                icon_color: [38/255, 38/255, 38/255, 1]
+                icon_size: dp(40)
+                height: dp(40)
+                pos_hint: {'x': -0.03, 'center_y': 0.5}
+                on_release:
+                    root.manager.get_screen('home-login').ids.home.switch_tab('screen 2')
+                    root.manager.current = 'home-login'
+                    # root.manager.current_screen.ids.homes.current = 'screen 2'
+
+            FitImage:
+                id: img
+                source: 'assets/images/giver1.png'
+                adaptive_size: True
+                size_hint: None, None
+                size: dp(40), dp(40)
+                pos_hint: {'x': 0.14,'center_y': 0.5}
+
+            MDTextButton:
+                text: 'Kennedy Leonard'
+                bold: True
+                font_size: sp(20)
+                text_size: self.size
+                size_hint: 1, None
+                height: dp(20)
+                color: 38/255, 38/255, 38/255, 1
+                pos_hint: {'x': 0.27,'center_y': 0.5}
+                on_release: root.manager.current = 'profiles'
+
+            MDIconButton:
+                icon: 'phone'
+                theme_icon_color: 'Custom'
+                icon_color: [70/255, 110/255, 195/255, 1]
+                icon_size: dp(20)
+                pos_hint: {'x': 0.80, 'center_y': 0.5}
+
+            MDIconButton:
+                icon: 'video'
+                theme_icon_color: 'Custom'
+                icon_color: [70/255, 110/255, 195/255, 1]
+                icon_size: dp(20)
+                pos_hint: {'x': 0.88, 'center_y': 0.5}
+
+        MDLabel:
+            text: '19 Apr, 9:45 am'
+            font_size: sp(12)
+            text_size: self.size
+            size_hint: 0.92, None
+            height: dp(12)
+            color: 38/255, 38/255, 38/255, 1
+            pos_hint: {'x': 0.45,'top': 0.775}
+
+        MDLabel:
+            canvas.before:
+                Color:
+                    rgba: 70/255, 110/255, 195/255, 0.25
+                RoundedRectangle:
+                    size: dp(85), self.height+20
+                    radius: [dp(8), dp(8), dp(0), dp(8)]
+                    pos: self.x-5, self.y-10
+            text: 'Hi Kennedy!'
+            font_name: 'Proxima'
+            font_size: sp(14)
+            text_size: self.size
+            size_hint: 1, None
+            height: dp(13)
+            color: 38/255, 38/255, 38/255, 1
+            pos_hint: {'x': 0.58,'top': 0.725}
+
+        MDLabel:
+            canvas.before:
+                Color:
+                    rgba: 70/255, 110/255, 195/255, 0.25
+                RoundedRectangle:
+                    size: dp(150), self.height+20
+                    radius: [dp(8), dp(8), dp(0), dp(8)]
+                    pos: self.x-5, self.y-10
+            text: 'Is my pet getting along?'
+            font_name: 'Proxima'
+            font_size: sp(14)
+            height: dp(13)
+            text_size: self.size
+            size_hint: 1, None
+            color: 38/255, 38/255, 38/255, 1
+            pos_hint: {'x': 0.58,'top': 0.67}
+
+        MDLabel:
+            text: '19 Apr, 10:00 am'
+            font_name: 'Proxima'
+            font_size: sp(12)
+            text_size: self.size
+            size_hint: 0.92, None
+            height: dp(12)
+            color: 38/255, 38/255, 38/255, 1
+            pos_hint: {'x': 0.07,'top': 0.6}
+
+        MDLabel:
+            canvas.before:
+                Color:
+                    rgba: 232/255, 233/255, 235/255, 0.6
+                RoundedRectangle:
+                    size: dp(142), self.height+20
+                    # size: self.size
+                    radius: [0, dp(8), dp(8), dp(8)]
+                    pos: self.x-5, self.y-10
+            text: 'Brandy is a lovely pet'
+            font_name: 'Proxima'
+            font_size: sp(14)
+            text_size: self.size
+            size_hint: 1, None
+            height: dp(13)
+            color: 38/255, 38/255, 38/255, 1
+            pos_hint: {'x': 0.05,'top': 0.55}
+
+        MDLabel:
+            canvas.before:
+                Color:
+                    rgba: 232/255, 233/255, 235/255, 0.6
+                RoundedRectangle:
+                    size: dp(210), self.height+20
+                    # size: self.size
+                    radius: [0, dp(8), dp(8), dp(8)]
+                    pos: self.x-5, self.y-10
+                    # center_y: self.center_y
+            text: 'Brandy seems to be getting along...'
+            font_name: 'Proxima'
+            font_size: sp(12)
+            text_size: self.size
+            size_hint: 1, None
+            height: dp(12)
+            color: 38/255, 38/255, 38/255, 1
+            pos_hint: {'x': 0.05,'top': 0.495}
+
+        FitImage:
+            source: 'assets/images/dog.png'
+            radius: dp(10), dp(10), dp(10), dp(10)
+            size_hint: None, None
+            pos_hint: {'x': 0.04, 'top': 0.42}
+            size: dp(178), dp(182)
+
+        MDTextField:
+            id: chat_message
+            mode: 'round'
+            text: ''
+            hint_text: 'Enter your message'
+            font_name: 'Proxima'
+            hint_text_color_normal: 195/255, 195/255, 195/255, 1
+            line_color_normal: 195/255, 195/255, 195/255, 1
+            multilline: False
+            icon_right: 'send'
+            icon_right_color_normal: 38/255, 38/255, 38/255, 0.8
+            icon_right_color_focus: 70/255, 110/255, 195/255, 1
+            text_color_normal: 38/255, 38/255, 38/255, 0.8
+            text_color_focus: 70/255, 110/255, 195/255, 0.9
+            pos_hint: {'center_x': 0.5,'top': 0.12}
+            size_hint: 0.82, None
+            height: dp(60)
+            valign: 'center'
+            hint_text_font_size: sp(8)
+            font_size: sp(20)
+            # height: dp(80)
+            fill_color_normal: 250/255, 250/255, 250/255, 1
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                if self.text != '': self.icon_right_color_normal=[70/255, 110/255, 195/255, 1]
+
+<ProfilesScreen>:
+    FloatLayout:
+        padding: 0, 0, 0, 0
+
+        FitImage:
+            source: 'assets/images/ken.png'
+            size_hint: 1, 0.5
+            # size: '', ''
+            pos_hint: {'top': 1}
+
+        MDIconButton:
+            icon: 'chevron-left'
+            theme_icon_color: 'Custom'
+            icon_color: [1, 1, 1, 1]
+            icon_size: dp(40)
+            pos_hint: {'x': 0, 'top': 0.96}
+            on_release:
+                root.manager.current = 'home-login'
+
+        MD3FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: [1, 1, 1, 1]
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [dp(12), dp(12), 0, 0]
+
+            style: 'elevated'
+            elevation: dp(4)
+            size_hint: 1, 1
+            pos_hint: {'top': 0.6}
+
+            MDLabel:
+                text: "Kennedy Leonard"
+                font_name: 'Proxima'
+                bold: True
+                font_size: sp(22)
+                text_size: self.size
+                size_hint: 1, None
+                height: dp(22)
+                color: [38/255, 38/255, 38/255, 1]
+                pos_hint: {'x': 0.06, 'top': 0.98}
+
+            MDLabel:
+                text: "2, Orange Estate, Arepo, Lagos."
+                font_name: 'Proxima'
+                # bold: True
+                font_size: sp(20)
+                text_size: self.size
+                size_hint: 1, None
+                height: dp(20)
+                color: [38/255, 38/255, 38/255, 1]
+                pos_hint: {'x': 0.06, 'top': 0.94}
+
+            MDLabel:
+                text: "Rating:"
+                font_name: 'Proxima'
+                bold: True
+                font_size: sp(20)
+                text_size: self.size
+                size_hint: 1, None
+                height: dp(20)
+                color: [38/255, 38/255, 38/255, 1]
+                pos_hint: {'x': 0.06, 'top': 0.88}
+
+            MDLabel:
+                text: "4.7"
+                font_name: 'Proxima'
+                # bold: True
+                font_size: sp(20)
+                text_size: self.size
+                size_hint: 1, None
+                height: dp(20)
+                color: [38/255, 38/255, 38/255, 1]
+                pos_hint: {'x': 0.06, 'top': 0.84}
+
+            MDLabel:
+                text: "Price:"
+                font_name: 'Proxima'
+                bold: True
+                font_size: sp(20)
+                text_size: self.size
+                size_hint: 1, None
+                height: dp(20)
+                color: [38/255, 38/255, 38/255, 1]
+                pos_hint: {'x': 0.4, 'top': 0.88}
+
+            MDLabel:
+                text: "₦2500/hr"
+                font_name: 'Proxima'
+                # bold: True
+                font_size: sp(20)
+                text_size: self.size
+                size_hint: 1, None
+                height: dp(20)
+                color: [38/255, 38/255, 38/255, 1]
+                pos_hint: {'x': 0.4, 'top': 0.84}
+
+            MDFloatLayout:
+                canvas.before:
+                    Color:
+                        rgba: [70/255, 110/255, 195/255, 0.08]
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [dp(12), dp(12), dp(12), dp(12)]
+
+                size_hint: 0.9, 0.15
+                pos_hint: {'top': 0.75, 'center_x': 0.5}
+
+                MDLabel:
+                    id: about
+                    text: "About me"
+                    bold: True
+                    font_size: sp(18)
+                    text_size: self.size
+                    size_hint: 0.92, None
+                    height: dp(18)
+                    color: [38/255, 38/255, 38/255, 1]
+                    pos_hint: {'x': 0.05, 'top': 0.90}
+
+                MDLabel:
+                    text: "I am a lover of cats and dogs, I can help you keep your pets safe."
+                    font_name: 'Proxima'
+                    font_size: sp(18)
+                    text_size: self.size
+                    size_hint: 0.92, None
+                    height: dp(36)
+                    valign: 'top'
+                    color: [38/255, 38/255, 38/255, 1]
+                    pos_hint: {'x': 0.05}
+                    top: about.y-dp(10)
+
+            MDFillRoundFlatButton:
+                text: '[b]Book[/b]'
+                bold: True
+                size_hint: 0.9, 0.07
+                pos_hint: {'center_x': 0.5, 'top': 0.58}
+                on_release: root.manager.current = 'bookings'
+
+
+<BookingsScreen>:
+
+    on_leave:
+        drop_off_date.text = ''
+        drop_off_time.text = ''
+
+    FloatLayout:
+        padding: 0, 0, 0, 0
+
+        MDTopAppBar:
+            title: 'Booking'
+            font_name: 'Proxima'
+            pos_hint: {"top": 1}
+            elevation: dp(10)
+            left_action_items: [['chevron-left', root.switch_profiles]]
+
+        MDTextField:
+            id: drop_off_date
+            mode: 'fill'
+            text: ''
+            hint_text: 'Date of drop off and pick up'
+            font_name: 'Proxima'
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            size_hint: 0.92, 0.08
+            hint_text_font_size: sp(8)
+            font_size: sp(16)
+            pos_hint: {'center_x': 0.5, 'top': 0.85}
+            icon_left: 'calendar'
+            # icon_right: 'menu-down'
+            on_focus:
+                if self.focus: root.date_picker()
+                Window.release_all_keyboards()
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                if self.text != '': self.icon_left_color_normal=[70/255, 110/255, 195/255, 1]
+
+        MDTextField:
+            id: drop_off_time
+            mode: 'fill'
+            text: ''
+            hint_text: 'Time of drop off'
+            font_name: 'Proxima'
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            size_hint: 0.92, 0.08
+            hint_text_font_size: sp(8)
+            font_size: sp(16)
+            pos_hint: {'center_x': 0.5, 'top': 0.74}
+            icon_left: 'clock-outline'
+            # icon_right: 'menu-down'
+            on_focus:
+                if self.focus: root.time_picker()
+                Window.release_all_keyboards()
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                if self.text != '': self.icon_left_color_normal=[70/255, 110/255, 195/255, 1]
+
+        MDLabel:
+            text: "Choose payment method"
+            font_name: 'Proxima'
+            bold: True
+            font_size: sp(16)
+            text_size: self.size
+            size_hint: 1, None
+            height: dp(16)
+            color: [38/255, 38/255, 38/255, 1]
+            pos_hint: {'x': 0.04, 'top': 0.62}
+
+        MDRoundFlatIconButton:
+            id: cash
+            icon: 'cash'
+            icon_size: dp(22)
+            text: 'Pay with cash'
+            halign: 'left'
+            rounded_button: False
+            radius: [dp(12),]
+            theme_text_color: 'Custom'
+            text_color: [38/255, 38/255, 38/255, 1]
+            line_color: [229/255, 229/255, 299/255, 1]
+            size_hint: 0.9, 0.065
+            pos_hint: {'center_x': 0.5, 'top': 0.58}
+            on_release: root.cash_payment()
+
+        MDIcon:
+            icon: 'chevron-right'
+            icon_size: dp(16)
+            color: [38/255, 38/255, 38/255, 0.5]
+            pos_hint: {'x': 0.85}
+            height: dp(16)
+            center_y: cash.center_y
+
+        MDRoundFlatIconButton:
+            id: card
+            icon: 'credit-card-outline'
+            icon_size: dp(22)
+            text: 'Pay with card'
+            halign: 'left'
+            rounded_button: False
+            radius: [dp(12),]
+            theme_text_color: 'Custom'
+            text_color: [38/255, 38/255, 38/255, 1]
+            line_color: [229/255, 229/255, 299/255, 1]
+            size_hint: 0.9, 0.065
+            pos_hint: {'center_x': 0.5}
+            top: cash.y-dp(15)
+            on_release: root.manager.current = 'card-payment'
+
+        MDIcon:
+            icon: 'chevron-right'
+            icon_size: dp(16)
+            color: [38/255, 38/255, 38/255, 0.5]
+            pos_hint: {'x': 0.85}
+            height: dp(16)
+            center_y: card.center_y
+
+<CardPaymentScreen>:
+
+    on_leave:
+        card_number.text = ''
+        expiry_date.text = ''
+        cvv.text = ''
+
+    FloatLayout:
+        padding: 0, 0, 0, 0
+
+        MDTopAppBar:
+            title: 'Pay with card'
+            font_name: 'Proxima'
+            pos_hint: {"top": 1}
+            elevation: dp(10)
+            left_action_items: [['chevron-left', root.switch_book]]
+
+        MDTextField:
+            id: card_number
+            input_filter: 'int'
+            input_type: 'number'
+            text: ''
+            mode: 'rectangle'
+            hint_text: 'Card Number'
+            font_name: 'Proxima'
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required: XXXXXXXXXXXXXXXX.'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            max_text_length: 16
+            size_hint: 0.88, 0.1
+            hint_text_font_size: sp(8)
+            font_size: sp(18)
+            pos_hint: {'center_x': 0.5, 'top': 0.85}
+            icon_left: 'credit-card'
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                if self.text != '': self.icon_left_color_normal=[70/255, 110/255, 195/255, 1]
+
+        MDTextField:
+            id: expiry_date
+            input_type: 'tel'
+            mode: 'rectangle'
+            text: ''
+            hint_text: 'Expiry date'
+            font_name: 'Proxima'
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required: MM/YY. 5 characters'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            max_text_length: 5
+            size_hint: 0.395, 0.1
+            hint_text_font_size: 6
+            font_size: sp(18)
+            pos_hint: {'x': 0.06, 'top': 0.73}
+            icon_left: 'credit-card-clock'
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                if self.text != '': self.icon_left_color_normal=[70/255, 110/255, 195/255, 1]
+
+        MDTextField:
+            id: cvv
+            input_filter: 'int'
+            input_type: 'number'
+            mode: 'rectangle'
+            text: ''
+            hint_text: 'CVV number'
+            font_name: 'Proxima'
+            hint_text_color_normal: 38/255, 38/255, 38/255, 0.5
+            hint_text_color_focus: 38/255, 38/255, 38/255, 0.5
+            helper_text: 'Required: XXX'
+            helper_text_mode: 'on_error'
+            text_color_normal: 38/255, 38/255, 38/255, 1
+            multiline: False
+            max_text_length: 3
+            size_hint: 0.395, 0.1
+            hint_text_font_size: sp(8)
+            font_size: sp(18)
+            pos_hint: {'x': 0.545, 'top': 0.73}
+            icon_left: 'credit-card-lock'
+            on_text:
+                if self.text != '': self.hint_text_color_normal=[70/255, 110/255, 195/255, 1]
+                if self.text != '': self.icon_left_color_normal=[70/255, 110/255, 195/255, 1]
+
+        MDLabel:
+            id: remember
+            text: "Remember this card next time"
+            font_name: 'Proxima'
+            # bold: True
+            font_size: sp(16)
+            text_size: self.size
+            size_hint: 1, None
+            height: dp(16)
+            color: [38/255, 38/255, 38/255, 1]
+            pos_hint: {'x': 0.04, 'top': 0.58}
+
+        MDSwitch:
+            # pos_hint: {'x': 0.62}
+            x: remember.center_x+dp(40)
+            widget_style: 'ios'
+            width: dp(40)
+            center_y: remember.center_y
+
+        MDFillRoundFlatButton:
+            text: '[b]Pay ₦2500[/b]'
+            bold: True
+            size_hint: 0.9, 0.07
+            pos_hint: {'center_x': 0.5, 'top': 0.50}
+            on_release: root.card_paid()
